@@ -6,9 +6,24 @@
     <link rel="manifest"  href="./manifest.json">
     <link rel="stylesheet"  href="./css/style.css">
     <title>Hello, PWA !!</title>
+    <script src="https://cdn.jsdelivr.net/npm/vue"></script>
+
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
+    <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
+    <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+
+    <script>
+      ons.ready(function() {
+      });
+    </script>
   </head>
   <body>
-    <p>Hello, World !!</p>
+    <ons-navigator id="navigator" page="page1.html"></ons-navigator>
+    <div id='app'>
+      <p>{{message}}</p>
+    </div>
+
+    <ons-button onclick="ons.notification.alert('Hello World!')">Click Me</ons-button>
     <script>
       // ServiceWorker登録
       if ('serviceWorker'  in navigator) {
@@ -18,6 +33,13 @@
           console.log('ServiceWorker registration failed: ', err);
         });
       }
+
+      var vue = new Vue({
+        el: '#app',
+        data:{
+          message:'Hello, Vue !'
+        }
+      })
     </script>
   </body>
 </html>

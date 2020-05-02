@@ -6,3 +6,11 @@ const functions = require('firebase-functions');
 exports.helloWorld = functions.https.onRequest((request, response) => {
  response.send("Hello from Firebase!");
 });
+
+exports.hello = functions.https.onRequest((request,response) => {
+  if(request.query.name !== undefined){
+      response.send("Hello " + request.query.name + " !");
+  } else {
+      response.send("Hello from Firebase!");
+  }
+});
