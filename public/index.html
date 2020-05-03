@@ -5,12 +5,43 @@
     <meta name="viewport"  content="width=device-width, initial-scale=1">
     <link rel="manifest"  href="./manifest.json">
     <link rel="stylesheet"  href="./css/style.css">
-    <title>Hello, PWA !!</title>
+    <title>GTFS 時刻表 for moro</title>
     <script src="https://cdn.jsdelivr.net/npm/vue"></script>
 
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsenui.css">
     <link rel="stylesheet" href="https://unpkg.com/onsenui/css/onsen-css-components.min.css">
     <script src="https://unpkg.com/onsenui/js/onsenui.min.js"></script>
+
+    <script src="//cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+
+    <script src='https://cdn.jsdelivr.net/npm/store-js@2.0.4/dist/store.legacy.min.js'></script>
+
+    <script src="env.js"></script>
+
+
+    <script>
+      // インストール処理
+      if ('serviceWorker' in navigator) {
+        navigator.serviceWorker.register('sw.js').then(function(registration) {
+          // 登録成功
+          console.log('ServiceWorker の登録に成功しました。スコープ: ', registration.scope);
+        }).catch(function(err) {
+          // 登録失敗
+          console.log('ServiceWorker の登録に失敗しました。', err);
+        });
+      }
+    </script>
+
+    <style>
+      #map { height: 250px; width: 100%}
+    </style>
+
+    <script>
+      // 画面遷移関数
+      function move(stop_ids,stop_name){
+        document.querySelector('#navigator').pushPage('page2.html',{data:{stop_ids:stop_ids,stop_name:stop_name}});
+      }
+    </script>
 
     <script>
       ons.ready(function() {
@@ -19,27 +50,5 @@
   </head>
   <body>
     <ons-navigator id="navigator" page="page1.html"></ons-navigator>
-    <div id='app'>
-      <p>{{message}}</p>
-    </div>
-
-    <ons-button onclick="ons.notification.alert('Hello World!')">Click Me</ons-button>
-    <script>
-      // ServiceWorker登録
-      if ('serviceWorker'  in navigator) {
-        navigator.serviceWorker.register('./sw.js').then(function(registration) {
-          console.log('ServiceWorker registration successful with scope: ', registration.scope);
-        }).catch(function(err) {
-          console.log('ServiceWorker registration failed: ', err);
-        });
-      }
-
-      var vue = new Vue({
-        el: '#app',
-        data:{
-          message:'Hello, Vue !'
-        }
-      })
-    </script>
   </body>
 </html>
