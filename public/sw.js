@@ -1,8 +1,8 @@
 // キャッシュ名とキャッシュファイルの指定
 var CACHE_NAME = 'simple-pwa-caches';
 var urlsToCache = [
-	'./index.html',
-	'./css/style.css'
+  './css/style.css',
+  './images/loading.gif'
 ];
 
 // インストール処理
